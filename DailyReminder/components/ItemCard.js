@@ -1,16 +1,17 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import React from 'react'
-import Ant from 'react-native-vector-icons/AntDesign'
-const ItemCard = ({ title, dueDate, onDelete, onPress, onEidit }) => {
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import React, { memo } from 'react';
+import Ant from 'react-native-vector-icons/AntDesign';
+const ItemCard = ({ title, dueDate, onDelete, onPress, onFinish,description}) => {
     return (
         <TouchableOpacity style={styles.card} onPress={onPress}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <View style={{ width: '75%' }}>
                     <Text style={styles.cardTxt}>{title}</Text>
+                    <Text style={styles.cardDesc}>{description}</Text>
                     <Text style={styles.cardDate}>{dueDate}</Text>
                 </View>
                 <View style={{ flexDirection: 'row' }}>
-                    <TouchableOpacity style={styles.btn} onPress={onEidit}>
+                    <TouchableOpacity style={styles.btn} onPress={onFinish}>
                         <Ant size={22} color={'#ffffff'} name='checkcircle' />
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btn} onPress={onDelete}>
@@ -21,7 +22,7 @@ const ItemCard = ({ title, dueDate, onDelete, onPress, onEidit }) => {
         </TouchableOpacity>
     )
 }
-export default ItemCard
+export default memo(ItemCard)
 const styles = StyleSheet.create({
     card: {
         width: '95%',
@@ -44,12 +45,17 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         textAlign: 'left',
         color: '#ffffff',
-        fontFamily: 'Poppins-Medium',
+        fontFamily: 'Poppins-Bold',
     },
     cardDate: {
+        fontSize: 10,
+        color: '#ffca28',
+        fontFamily: 'Poppins-Regular',
+    },
+    cardDesc: {
         fontSize: 12,
         color: '#f3e5f5',
-        fontFamily: 'Poppins-Regular',
+        fontFamily: 'Poppins-Medium',
     },
     btn: {
         margin: 5,
